@@ -28,8 +28,8 @@ const NavBar = () => {
           <Link className="text-xl font-semibold" to='/menu' >
             Our Menu
           </Link>
-          <Link className="text-xl font-semibold" to='/' >
-           Our Shop
+          <Link className="text-xl font-semibold" to='/order' >
+           Order Now
           </Link>
         </Navbar.Collapse>
       </Navbar>
