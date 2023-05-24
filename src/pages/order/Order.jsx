@@ -4,10 +4,16 @@ import Cover from "../../shared/cover/Cover";
 import 'react-tabs/style/react-tabs.css';
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import TabCard from "../../shared/tabIndexCard/TabCard";
+import { useParams } from "react-router-dom";
 
 const Order = () => {
+
+  const {catagory}=useParams();
+  const allTabs=['salad','pizza','soup','dessert','drinks']
+  const initialIndex=allTabs.indexOf(catagory);
+  console.log(initialIndex);
     
-    const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(initialIndex);
   return (
     <div>
       <div>

@@ -3,6 +3,7 @@ import Cover from "../../shared/cover/Cover";
 import menubg from "../../assets/menu/banner3.jpg";
 import MenuFood from "../../shared/viewmenufood/MenuFood";
 import TitlewithBg from "../../shared/titlebg/TitlewithBg";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (
@@ -21,13 +22,15 @@ const Menu = () => {
           subHeading="---Don't miss---"
         ></MenuFood>
       </div>
-      <div className="text-center">
-        <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Order Now
-          </span>
-        </button>
-      </div>
+      <Link>
+        <div className="text-center">
+          <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Order Now
+            </span>
+          </button>
+        </div>
+      </Link>
       <div>
         <TitlewithBg
           title="DESSERTS"
@@ -35,13 +38,15 @@ const Menu = () => {
         ></TitlewithBg>
         <MenuFood catagory="dessert"></MenuFood>
       </div>
-      <div className="text-center">
-        <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Order Now
-          </span>
-        </button>
-      </div>
+      <Link to="/order/dessert">
+        <div className="text-center">
+          <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Order Now
+            </span>
+          </button>
+        </div>
+      </Link>
       <div>
         <TitlewithBg
           title="Pizzas"
@@ -49,13 +54,15 @@ const Menu = () => {
         ></TitlewithBg>
         <MenuFood catagory="pizza"></MenuFood>
       </div>
-      <div className="text-center">
-        <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Order Now
-          </span>
-        </button>
-      </div>
+      <Link to="/order/pizza">
+        <div className="text-center">
+          <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Order Now
+            </span>
+          </button>
+        </div>
+      </Link>
       <div>
         <TitlewithBg
           title="Salads"
@@ -63,13 +70,15 @@ const Menu = () => {
         ></TitlewithBg>
         <MenuFood catagory="salad"></MenuFood>
       </div>
-      <div className="text-center">
-        <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Order Now
-          </span>
-        </button>
-      </div>
+      <Link to="/order/salad">
+        <div className="text-center">
+          <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Order Now
+            </span>
+          </button>
+        </div>
+      </Link>
       <div>
         <TitlewithBg
           title="Soups"
@@ -77,13 +86,15 @@ const Menu = () => {
         ></TitlewithBg>
         <MenuFood catagory="soup"></MenuFood>
       </div>
-      <div className="text-center">
-        <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
-          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
-            Order Now
-          </span>
-        </button>
-      </div>
+      <Link to="/order/soup">
+        <div className="text-center">
+          <button class="relative inline-flexitems-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800">
+            <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+              Order Now
+            </span>
+          </button>
+        </div>
+      </Link>
     </section>
   );
 };

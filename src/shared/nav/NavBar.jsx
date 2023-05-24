@@ -28,7 +28,7 @@ const NavBar = () => {
           <Link className="text-xl font-semibold" to='/menu' >
             Our Menu
           </Link>
-          <Link className="text-xl font-semibold" to='/order' >
+          <Link className="text-xl font-semibold" to='/order/salad' >
            Order Now
           </Link>
         </Navbar.Collapse>
