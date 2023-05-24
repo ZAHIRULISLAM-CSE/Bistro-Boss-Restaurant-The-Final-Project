@@ -15,10 +15,12 @@ const MenuFood = ({catagory,heading,subHeading}) => {
     <div>
       <div className="w-[90%] mx-auto">
         <div>
-          <Title
+          {
+            heading && <Title
             heading={heading}
             subHeading={subHeading}
           ></Title>
+          }
         </div>
         <div className="grid mt-16 gap-8 md:grid-cols-2">
           {menu.map((item) => (

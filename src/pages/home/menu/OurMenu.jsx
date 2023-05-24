@@ -3,7 +3,6 @@ import Title from "../../../components/Title";
 import MenuFood from "../../../shared/viewmenufood/MenuFood";
 
 const OurMenu = () => {
-  const menu=[];
   return (
     <div className="w-[90%] mx-auto">
       <div>
