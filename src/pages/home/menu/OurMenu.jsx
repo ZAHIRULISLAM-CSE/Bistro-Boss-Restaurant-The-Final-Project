@@ -37,7 +37,7 @@ const OurMenu = () => {
         ))}
       </div>
       <div className="mt-12 mb-8 bg-black flex justify-center items-center h-[25vh]">
-            <h1 className="text-3xl text-white">Call Us: +88 0192345678910</h1>
+            <h1 className="text-3xl text-center text-white">Call Us: +88 0192345678910</h1>
       </div>
     </div>
   );
