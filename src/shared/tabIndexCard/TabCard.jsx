@@ -6,7 +6,7 @@ const TabCard = ({ selectab }) => {
   const [catagory, setCatagory] = useState(selectab);
 
   useEffect(() => {
-    fetch("menu.json")
+    fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
         const showData = data.filter((item) => item.category == catagory);
