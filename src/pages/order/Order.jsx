@@ -5,6 +5,7 @@ import 'react-tabs/style/react-tabs.css';
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import TabCard from "../../shared/tabIndexCard/TabCard";
 import { useParams } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Order = () => {
 
@@ -16,6 +17,9 @@ const Order = () => {
   const [tabIndex, setTabIndex] = useState(initialIndex);
   return (
     <div>
+      <Helmet>
+          <title>Bistro Boss | Order  </title>
+        </Helmet>
       <div>
         <Cover
           img={bg}

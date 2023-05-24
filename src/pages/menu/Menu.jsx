@@ -4,10 +4,14 @@ import menubg from "../../assets/menu/banner3.jpg";
 import MenuFood from "../../shared/viewmenufood/MenuFood";
 import TitlewithBg from "../../shared/titlebg/TitlewithBg";
 import { Link } from "react-router-dom";
+import {Helmet} from "react-helmet";
 
 const Menu = () => {
   return (
     <section>
+      <Helmet>
+        <title>Bistro Boss | Menu</title>
+      </Helmet>
       <div>
         <Cover
           img={menubg}
