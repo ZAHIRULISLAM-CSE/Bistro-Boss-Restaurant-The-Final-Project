@@ -19,8 +19,8 @@ const NavBar = () => {
           <Link className="text-xl font-semibold" to='/' >
             Home
           </Link>
-          <Link className="text-xl font-semibold" to='/' >
-            Contact Us
+          <Link className="text-xl font-semibold" to='/register' >
+            Register
           </Link>
           <Link className="text-xl font-semibold" to='/' >
             Dashboard

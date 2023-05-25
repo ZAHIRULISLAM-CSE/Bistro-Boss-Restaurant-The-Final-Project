@@ -1,11 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../shared/nav/NavBar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const Main = () => {
+    const [noHeaderFooter,setnoHeaderFooter]=useState(false);
+
+    const location=useLocation();
+    const pathName=location.pathname;
+    ///const test=location.pathname.includes("register");//the otherway to check
+    console.log(test);
+    useEffect(()=>{
+        if(pathName == '/register' ){
+            setnoHeaderFooter(true);
+       }
+       else{
+        setnoHeaderFooter(false);
+       }
+    },[pathName])
+    // console.log(noHeaderFooter)
+
     return (
         <div>
-            <NavBar></NavBar>
+            {
+                noHeaderFooter || <NavBar></NavBar>
+            }
             <Outlet></Outlet>
         </div>
     );
