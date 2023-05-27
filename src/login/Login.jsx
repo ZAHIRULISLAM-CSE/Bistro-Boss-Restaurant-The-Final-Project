@@ -76,7 +76,7 @@ const Login = () => {
             to="/register"
             className="text-blue-700 underline  cursor-pointer "
           >
-            Register
+            Login
           </Link>
         </p>
       </form>
