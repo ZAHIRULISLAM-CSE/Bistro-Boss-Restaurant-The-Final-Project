@@ -10,7 +10,7 @@ const Main = () => {
     ///const test=location.pathname.includes("register");//the otherway to check
     // console.log(test);
     useEffect(()=>{
-        if(pathName == '/register' ){
+        if(pathName == '/register' || '/login' ){
             setnoHeaderFooter(true);
        }
        else{

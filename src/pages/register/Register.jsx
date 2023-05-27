@@ -6,13 +6,13 @@ import { AuthContext } from "../../providers/AuthProviders";
 
 
 const Register = () => {
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch,reset, formState: { errors } } = useForm();
     const {creatUserWithEp}=useContext(AuthContext);
     const onSubmit = data => {
       creatUserWithEp(data.email,data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user)
+        reset()
       })
       .catch((error) => {
         const errorMessage = error.message;

@@ -6,6 +6,7 @@ import Cover from "../shared/cover/Cover";
 import Menu from "../pages/menu/Menu";
 import Order from "../pages/order/Order";
 import Register from "../pages/register/Register";
+import Login from "../login/Login";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element:<Register></Register>,
+      },
+      {
+        path: "login",
+        element:<Login></Login>,
       },
     ],
   },
