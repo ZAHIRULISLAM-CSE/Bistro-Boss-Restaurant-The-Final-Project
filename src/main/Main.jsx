@@ -3,26 +3,15 @@ import NavBar from '../shared/nav/NavBar';
 import { Outlet, useLocation } from 'react-router-dom';
 
 const Main = () => {
-    const [noHeaderFooter,setnoHeaderFooter]=useState(false);
+    // const [noHeaderFooter,setnoHeaderFooter]=useState(false);
 
     const location=useLocation();
-    const pathName=location.pathname;
-    ///const test=location.pathname.includes("register");//the otherway to check
-    // console.log(test);
-    useEffect(()=>{
-        if(pathName == '/register' || '/login' ){
-            setnoHeaderFooter(true);
-       }
-       else{
-        setnoHeaderFooter(false);
-       }
-    },[pathName])
-    // console.log(noHeaderFooter)
-
+    const test=location.pathname.includes("login" );//the otherway to check
+    const test1=location.pathname.includes("register")
     return (
         <div>
             {
-                noHeaderFooter || <NavBar></NavBar>
+                (test || test1) || <NavBar></NavBar>
             }
             <Outlet></Outlet>
         </div>

@@ -8,7 +8,6 @@ const AuthProviders = ({children}) => {
     const [user,setUser]=useState(null);
 
     const auth= getAuth(app);
-    console.log(auth)
     //Creat user
     const creatUserWithEp = (email,pass)=>{
         return createUserWithEmailAndPassword(auth,email,pass);
@@ -32,7 +31,6 @@ const AuthProviders = ({children}) => {
         }
     },[])
 
-    console.log(user);
 
        
     return (
