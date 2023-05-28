@@ -12,7 +12,6 @@ const Order = () => {
   const {catagory}=useParams();
   const allTabs=['salad','pizza','soup','dessert','drinks']
   const initialIndex=allTabs.indexOf(catagory);
-  console.log(initialIndex);
     
   const [tabIndex, setTabIndex] = useState(initialIndex);
   return (

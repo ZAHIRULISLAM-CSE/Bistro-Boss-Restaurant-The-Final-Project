@@ -2,10 +2,14 @@ import { Navbar } from "flowbite-react";
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProviders";
+import { FaShoppingCart } from 'react-icons/fa';
+import useAddededCart from "../../hooks/useAddededCart";
 
 const NavBar = () => {
 
   const {user,logOut}=useContext(AuthContext);
+  const [cart,refetch]=useAddededCart();
+  console.log(cart)
 
   const handleSignOut=()=>{
       logOut();
@@ -34,8 +38,10 @@ const NavBar = () => {
             Login
            </Link>
           }
-          <Link className="text-xl font-semibold" to='/' >
-            Dashboard
+          <Link className="text-xl inline-flex font-semibold" to='/' >
+            <FaShoppingCart></FaShoppingCart><span> {
+              user?.email ? cart.length:0
+              } </span>
           </Link>
           <Link className="text-xl font-semibold" to='/menu' >
             Our Menu

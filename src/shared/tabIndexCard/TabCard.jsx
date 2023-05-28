@@ -1,9 +1,36 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../providers/AuthProviders";
+import useAddededCart from "../../hooks/useAddededCart";
 
 const TabCard = ({ selectab }) => {
   const [loading, setLoading] = useState(true);
   const [menu, setMenu] = useState([]);
   const [catagory, setCatagory] = useState(selectab);
+  const {user}=useContext(AuthContext);
+  const email=user?.email;
+  const [,refetch]=useAddededCart();
+
+  const handleAddtoCart=(item)=>{
+    const {image,name,price,_id:id}=item;
+    const sendingData={
+      image,name,price,id,email
+    }
+      fetch("http://localhost:5000/cart",{
+        method:"POST",
+        headers:{
+          "content-type":"application/json"
+        },
+        body:JSON.stringify(sendingData)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.insertedId){
+          Swal.fire('This Product is Added to cart')
+          refetch();//refetch when successfull
+        }
+      })
+  }
 
   useEffect(() => {
     fetch("http://localhost:5000/menu")
@@ -38,7 +65,7 @@ const TabCard = ({ selectab }) => {
                       ? item.recipe.slice(0, 80) + "..."
                       : item.recipe}
                   </p>
-                  <a className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <a onClick={()=>handleAddtoCart(item)} className="inline-flex cursor-pointer items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Add To Cart
                     <svg
                       aria-hidden="true"
