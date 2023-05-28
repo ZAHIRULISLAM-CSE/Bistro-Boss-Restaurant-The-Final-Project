@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -15,7 +17,8 @@ const Login = () => {
         signInWithEP(data.email,data.password)
         .then((result) => {
             const user = result.user;
-            console.log(user);
+            Swal.fire('Login is Successfull')
+            navigate('/');
           })
           .catch((error) => {
             const errorMessage = error.message;
@@ -75,7 +78,7 @@ const Login = () => {
             to="/register"
             className="text-blue-700 underline  cursor-pointer "
           >
-            Login
+           Register
           </Link>
         </p>
       </form>

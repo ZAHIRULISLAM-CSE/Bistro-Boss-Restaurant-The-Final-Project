@@ -1,8 +1,16 @@
 import { Navbar } from "flowbite-react";
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProviders";
 
 const NavBar = () => {
+
+  const {user,logOut}=useContext(AuthContext);
+
+  const handleSignOut=()=>{
+      logOut();
+  }
+
   return (
     <div>
       <Navbar className=" text-black fixed  opacity-40  z-10 w-full " fluid={true} rounded={true}>
@@ -19,9 +27,13 @@ const NavBar = () => {
           <Link className="text-xl font-semibold" to='/' >
             Home
           </Link>
-          <Link className="text-xl font-semibold" to='/register' >
-            Register
-          </Link>
+          {
+            user ?<Link onClick={handleSignOut} className="text-xl font-semibold" >
+            SignOut
+           </Link>:<Link className="text-xl font-semibold" to='/login' >
+            Login
+           </Link>
+          }
           <Link className="text-xl font-semibold" to='/' >
             Dashboard
           </Link>
