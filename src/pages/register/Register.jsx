@@ -1,18 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProviders";
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
+    const {logOut}=useContext(AuthContext);
     const { register, handleSubmit, watch,reset, formState: { errors } } = useForm();
     const {creatUserWithEp}=useContext(AuthContext);
+    const navigate=useNavigate();
     const onSubmit = data => {
       creatUserWithEp(data.email,data.password)
       .then((result) => {
         const user = result.user;
-        reset()
+        updateProfile(user, {
+          displayName:data.name, photoURL:data.photo
+        }).then(() => {
+          Swal.fire('Register is Successfull')
+          logOut();
+          navigate("/login");
+        }).catch((error) => {
+        });
       })
       .catch((error) => {
         const errorMessage = error.message;

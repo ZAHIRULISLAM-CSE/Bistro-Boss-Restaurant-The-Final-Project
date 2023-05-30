@@ -1,12 +1,14 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../config/firebase.config';
+import { GoogleAuthProvider } from "firebase/auth";
 
 export  const AuthContext=createContext();
 
 const AuthProviders = ({children}) => {
     const [user,setUser]=useState(null);
     const [loading,setLoading]=useState(true);
+    const googleProvider = new GoogleAuthProvider();
 
     const auth= getAuth(app);
     //Creat user
@@ -24,9 +26,13 @@ const AuthProviders = ({children}) => {
           });
     }
 
+    const googleLogin=()=>{
+        return signInWithPopup(auth,googleProvider);
+    }
+
 
     const shareFunc={
-        creatUserWithEp,signInWithEP,user,logOut
+        creatUserWithEp,signInWithEP,user,logOut,loading,googleLogin
     }
 
     useEffect(()=>{
@@ -38,6 +44,8 @@ const AuthProviders = ({children}) => {
             unSubscribe();
         }
     },[])
+
+    console.log(user);
 
 
        
