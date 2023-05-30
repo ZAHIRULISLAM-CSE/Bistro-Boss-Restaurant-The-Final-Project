@@ -19,9 +19,24 @@ const Register = () => {
         updateProfile(user, {
           displayName:data.name, photoURL:data.photo
         }).then(() => {
-          Swal.fire('Register is Successfull')
-          logOut();
-          navigate("/login");
+          const name=user.displayName;
+          const email=data.email;
+          const sendingData={email,name};
+          fetch("http://localhost:5000/users",{
+            method:"POST",
+            headers:{
+              "content-type":"application/json"
+            },
+            body:JSON.stringify(sendingData)
+          })
+          .then(res => res.json())
+          .then(data =>{
+              if(data.insertedId){
+                Swal.fire('Register is Successfull')
+                logOut();
+                navigate("/login");
+              }
+          })
         }).catch((error) => {
         });
       })
