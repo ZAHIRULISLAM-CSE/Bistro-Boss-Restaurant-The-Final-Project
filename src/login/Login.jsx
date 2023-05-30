@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const {googleLogin}=useContext(AuthContext);
+  const { googleLogin,logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state || "/";
@@ -20,23 +20,36 @@ const Login = () => {
     signInWithEP(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         Swal.fire("Login is Successfull");
         navigate(state, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log(errorMessage);
       });
   };
 
-  const handleGoogleLogin=()=>{
-        googleLogin()
-        .then((result) => {
-          navigate("/")
-        }).catch((error) => {
-        });
-  }
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result)
+        const name =result.user.displayName;
+        const email=result.user.email;
+        const sendingData={email,name};
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(sendingData),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+              logOut();
+              navigate("/login");
+          });
+      })
+      .catch((error) => {});
+  };
 
   return (
     <div>
