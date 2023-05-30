@@ -38,7 +38,7 @@ const NavBar = () => {
             Login
            </Link>
           }
-          <Link className="text-xl inline-flex font-semibold" to='/dashboard/mycart' >
+          <Link className="text-xl inline-flex font-semibold" to='/dashboard' >
             <FaShoppingCart></FaShoppingCart><span> {
               user?.email ? cart.length:0
               } </span>
