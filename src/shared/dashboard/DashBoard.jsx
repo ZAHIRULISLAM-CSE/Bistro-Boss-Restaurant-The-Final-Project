@@ -2,12 +2,13 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import useAddededCart from "../../hooks/useAddededCart";
 import { FaUtensilSpoon } from "react-icons/fa";
+import useIsAdmin from "../../hooks/useIsAdmin";
 
 const DashBoard = () => {
   const [cart] = useAddededCart();
 
   //TODO:MAKE isAdmin dynamic
-  const isAdmin = false;
+  const [isAdmin]= useIsAdmin();
 
   return (
     <div>
