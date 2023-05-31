@@ -7,7 +7,7 @@ const DashBoard = () => {
   const [cart] = useAddededCart();
 
   //TODO:MAKE isAdmin dynamic
-  const isAdmin = true;
+  const isAdmin = false;
 
   return (
     <div>

@@ -1,59 +1,87 @@
-import React, { createContext, useEffect, useState } from 'react';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import app from '../config/firebase.config';
+import React, { createContext, useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import app from "../config/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
 
-export  const AuthContext=createContext();
+export const AuthContext = createContext();
 
-const AuthProviders = ({children}) => {
-    const [user,setUser]=useState(null);
-    const [loading,setLoading]=useState(true);
-    const googleProvider = new GoogleAuthProvider();
+const AuthProviders = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const googleProvider = new GoogleAuthProvider();
 
-    const auth= getAuth(app);
-    //Creat user
-    const creatUserWithEp = (email,pass)=>{
-        return createUserWithEmailAndPassword(auth,email,pass);
-    }
+  const auth = getAuth(app);
+  //Creat user
+  const creatUserWithEp = (email, pass) => {
+    return createUserWithEmailAndPassword(auth, email, pass);
+  };
 
-    const signInWithEP=(email,pass)=>{
-        return signInWithEmailAndPassword(auth,email,pass)
-    }
+  const signInWithEP = (email, pass) => {
+    return signInWithEmailAndPassword(auth, email, pass);
+  };
 
-    const logOut=()=>{
-        signOut(auth).then(() => {
-          }).catch((error) => {
-          });
-    }
+  const logOut = () => {
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {});
+  };
 
-    const googleLogin=()=>{
-        return signInWithPopup(auth,googleProvider);
-    }
+  const googleLogin = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
 
+  const shareFunc = {
+    creatUserWithEp,
+    signInWithEP,
+    user,
+    logOut,
+    loading,
+    googleLogin,
+  };
 
-    const shareFunc={
-        creatUserWithEp,signInWithEP,user,logOut,loading,googleLogin
-    }
-
-    useEffect(()=>{
-        const unSubscribe=onAuthStateChanged(auth,(loogedUser)=>{
-            setUser(loogedUser);
-            setLoading(false);
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (loogedUser) => {
+      setUser(loogedUser);
+      const email = loogedUser?.email;
+      const sendData = { email };
+      if (loogedUser) {
+        fetch("http://localhost:5000/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(sendData),
         })
-        return ()=>{
-            unSubscribe();
-        }
-    },[])
+          .then((res) => res.json())
+          .then((data) => {
+            const token = data.token;
+            console.log(token)
+            if(token){
+             const set=localStorage.setItem("access-token", token);
+             setLoading(false);
+            }
+          });
+      } else {
+        setLoading(true);
+        localStorage.removeItem("access-token");
+      }
+    
+    });
+    return () => {
+      unSubscribe();
+    };
+  }, []);
 
-    console.log(user);
-
-
-       
-    return (
-        <AuthContext.Provider value={shareFunc} >
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={shareFunc}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProviders;

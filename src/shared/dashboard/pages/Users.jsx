@@ -14,7 +14,6 @@ const Users = () => {
   });
 
   const handleAdmin=(user)=>{
-    console.log(user);
         fetch(`http://localhost:5000/user/admin/${user._id}`,{
             method:"PATCH"
         })
