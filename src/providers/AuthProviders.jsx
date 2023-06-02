@@ -15,6 +15,7 @@ export const AuthContext = createContext();
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [queryLoading,setQueryLoading]=useState(true);
   const googleProvider = new GoogleAuthProvider();
 
   const auth = getAuth(app);
@@ -44,11 +45,13 @@ const AuthProviders = ({ children }) => {
     logOut,
     loading,
     googleLogin,
+    queryLoading
   };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (loogedUser) => {
       setUser(loogedUser);
+      setLoading(false);
       const email = loogedUser?.email;
       const sendData = { email };
       if (loogedUser) {
@@ -64,12 +67,12 @@ const AuthProviders = ({ children }) => {
             const token = data.token;
             console.log(token)
             if(token){
-             const set=localStorage.setItem("access-token", token);
-             setLoading(false);
+             localStorage.setItem("access-token", token);
+             setQueryLoading(false)
             }
           });
       } else {
-        setLoading(true);
+        setQueryLoading(true);
         localStorage.removeItem("access-token");
       }
     
