@@ -65,7 +65,6 @@ const AuthProviders = ({ children }) => {
           .then((res) => res.json())
           .then((data) => {
             const token = data.token;
-            console.log(token)
             if(token){
              localStorage.setItem("access-token", token);
              setQueryLoading(false)

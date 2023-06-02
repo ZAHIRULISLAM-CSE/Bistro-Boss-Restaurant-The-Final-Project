@@ -19,7 +19,6 @@ const useIsAdmin = () => {
         }
         
     })
-    console.log("Okkk")
     return [isAdmin,refetch,isLoading]
 };
 
