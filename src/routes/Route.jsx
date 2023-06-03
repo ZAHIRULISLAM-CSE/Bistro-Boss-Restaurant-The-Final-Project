@@ -14,6 +14,7 @@ import Users from "../shared/dashboard/pages/Users";
 import AdminRoute from "./AdminRoute";
 import AddAnItem from "../dashboard/AddAnItem";
 import ManageItems from "../dashboard/ManageItems";
+import Payment from "../dashboard/Payment";
 
 const router = createBrowserRouter([
   {
@@ -48,8 +49,14 @@ const router = createBrowserRouter([
     children:[
       {
         path: "mycart",
-        element:<MyCart></MyCart>,
+        element:<PrivateRoute><MyCart></MyCart></PrivateRoute>,
       },
+      {
+          path:"payment",
+          element:<PrivateRoute><Payment></Payment></PrivateRoute>
+      },
+
+      //admin
       {
         path: "users",
         element:<AdminRoute><Users></Users></AdminRoute>

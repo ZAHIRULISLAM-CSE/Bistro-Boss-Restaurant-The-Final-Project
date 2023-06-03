@@ -2,6 +2,7 @@ import React from "react";
 import useAddededCart from "../hooks/useAddededCart";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart,refetch] = useAddededCart();
@@ -39,7 +40,7 @@ const MyCart = () => {
       <div className="flex text-lg mt-12 mb-12 lg:text-2xl font-semibold justify-center gap-8">
         <h1 className="">Total Items:{cart.length}</h1>
         <h1>Price:{price}</h1>
-        <button>Pay</button>
+        <Link to="/dashboard/payment" ><button className="bg-blue-600 px-2 py-1 rounded-md" >Pay</button></Link>
       </div>
       <div>
         <div className="relative overflow-x-auto">
