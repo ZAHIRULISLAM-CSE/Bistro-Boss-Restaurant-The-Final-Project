@@ -72,6 +72,7 @@ const AuthProviders = ({ children }) => {
           });
       } else {
         setQueryLoading(true);
+        console.log("okkkk")
         localStorage.removeItem("access-token");
       }
     
@@ -81,6 +82,7 @@ const AuthProviders = ({ children }) => {
     };
   }, []);
 
+    console.log(user)
   return (
     <AuthContext.Provider value={shareFunc}>{children}</AuthContext.Provider>
   );

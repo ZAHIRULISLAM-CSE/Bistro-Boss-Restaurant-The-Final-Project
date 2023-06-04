@@ -9,6 +9,7 @@ const useAddededCart = () => {
   if (user?.email) {
     set = true;
   }
+ 
   const [axiosSecure] = useAxiosSecure();
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ["usercart", user?.email],

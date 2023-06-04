@@ -44,8 +44,7 @@ const Login = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-              logOut();
-              navigate("/login");
+              navigate("/");
           });
       })
       .catch((error) => {});
