@@ -5,12 +5,14 @@ import { useState } from "react";
 import useAddededCart from "../hooks/useAddededCart";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AuthContext } from "../providers/AuthProviders";
+import Swal from "sweetalert2";
+import "./checkOut.css"
 
 const CheckOutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
-  const [cart] = useAddededCart();
+  const [cart,refetch] = useAddededCart();
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   const price = parseFloat(total.toFixed(2));
   const [axiosSecure] = useAxiosSecure();
@@ -80,16 +82,19 @@ const CheckOutForm = () => {
         const paymentInfo={
             email:user?.email,
             txId:paymentIntent.id,
+            date:new Date(),
             price,
             quantity:cart.length,
-            items:cart.map(item=> item._id),
-            itemsName:cart.map(item => item.name)
+            cartItemsId:cart.map(item=> item._id),
+            itemsName:cart.map(item => item.name),
+            status:"Pending"
         }
         axiosSecure.post("/payments",paymentInfo)
         .then(res=>{
-            console.log(res.data);
-            if(res.data.insertedId){
-
+          console.log(res.data)
+            if(res.data.paymentResult.insertedId && res.data.userCartResult.deletedCount){
+              refetch();
+                alert("Payment Complete")
             }
         })
     }
