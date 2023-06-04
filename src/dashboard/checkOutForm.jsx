@@ -5,28 +5,27 @@ import { useState } from "react";
 import useAddededCart from "../hooks/useAddededCart";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { AuthContext } from "../providers/AuthProviders";
-import Swal from "sweetalert2";
-import "./checkOut.css"
+import "./checkOut.css";
 
 const CheckOutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState(null);
-  const [cart,refetch] = useAddededCart();
+  const [cart, refetch] = useAddededCart();
   const total = cart.reduce((sum, item) => sum + item.price, 0);
   const price = parseFloat(total.toFixed(2));
   const [axiosSecure] = useAxiosSecure();
-  const[txId,settxId]=useState(null);
-  const [processing,setProcessing]=useState(false);
+  const [txId, settxId] = useState(null);
+  const [processing, setProcessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    if(price>0){
-        axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-            console.log(res.data.clientSecret);
-            setClientSecret(res.data.clientSecret);
-        });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        console.log(res.data.clientSecret);
+        setClientSecret(res.data.clientSecret);
+      });
     }
   }, [price, useAxiosSecure]);
 
@@ -46,7 +45,7 @@ const CheckOutForm = () => {
     if (card == null) {
       return;
     }
-    setProcessing(true)
+    setProcessing(true);
     // Use your card Element with other Stripe.js APIs
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -71,32 +70,35 @@ const CheckOutForm = () => {
         },
       });
 
-      setProcessing(false);
+    setProcessing(false);
 
     if (confirmError) {
       console.log(confirmError);
     }
 
-    if(paymentIntent.status=="succeeded"){
-        settxId(paymentIntent.id)
-        const paymentInfo={
-            email:user?.email,
-            txId:paymentIntent.id,
-            date:new Date(),
-            price,
-            quantity:cart.length,
-            cartItemsId:cart.map(item=> item._id),
-            itemsName:cart.map(item => item.name),
-            status:"Pending"
+    if (paymentIntent.status == "succeeded") {
+      settxId(paymentIntent.id);
+      const paymentInfo = {
+        email: user?.email,
+        txId: paymentIntent.id,
+        date: new Date(),
+        price,
+        quantity: cart.length,
+        cartItemsId: cart.map((item) => item._id),
+        menuItemsId: cart.map((item) => item.id),
+        itemsName: cart.map((item) => item.name),
+        status: "Pending",
+      };
+      axiosSecure.post("/payments", paymentInfo).then((res) => {
+        console.log(res.data);
+        if (
+          res.data.paymentResult.insertedId &&
+          res.data.userCartResult.deletedCount
+        ) {
+          refetch();
+          alert("Payment Complete");
         }
-        axiosSecure.post("/payments",paymentInfo)
-        .then(res=>{
-          console.log(res.data)
-            if(res.data.paymentResult.insertedId && res.data.userCartResult.deletedCount){
-              refetch();
-                alert("Payment Complete")
-            }
-        })
+      });
     }
 
     console.log("payment intent", paymentIntent);
